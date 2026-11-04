@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: .
+    image: ai-chatbot-backend:latest
+    container_name: ai-chatbot-backend
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+
+    volumes:
+      - ./chat_history.db:/app/chat_history.db
+      - ./chroma_db:/app/chroma_db
+
+    restart: unless-stopped
